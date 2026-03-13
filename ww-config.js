@@ -33,6 +33,20 @@ export default {
       defaultValue: '',
       hidden: true,
     },
+    portalTarget: {
+      label: { en: 'Portal Target' },
+      type: 'Text',
+      bindable: true,
+      hidden: true,
+      defaultValue: '',
+    },
+    userRole: {
+      label: { en: 'User Role' },
+      type: 'Text',
+      bindable: true,
+      hidden: true,
+      defaultValue: '',
+    },
   },
   triggerEvents: [
     {

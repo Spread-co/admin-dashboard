@@ -1,5 +1,5 @@
 <template>
-  <div class="spread-ad">
+  <div v-if="!content.portalTarget || content.portalTarget === 'admin'" class="spread-ad">
     <!-- Header -->
     <div class="spread-ad__header">
       <h2 class="spread-ad__title">Dashboard</h2>
