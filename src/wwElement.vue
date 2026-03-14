@@ -284,12 +284,15 @@ export default {
             url = this.content?.supabaseUrl, k = this.content?.supabaseAnonKey;
       if (!t || !u || !url || !k) { this.permissionGranted = false; return; }
       try {
-        const r = await fetch(`${url}/rest/v1/rpc/has_role`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: k, Authorization: `Bearer ${t}` },
-          body: JSON.stringify({ p_user_id: u, p_role_key: 'admin' }),
-        });
-        this.permissionGranted = r.ok ? !!(await r.json()) : false;
+        const ALLOWED = ['founder', 'platform_admin', 'regional_manager', 'country_manager'];
+        const results = await Promise.all(ALLOWED.map(role =>
+          fetch(`${url}/rest/v1/rpc/has_role`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', apikey: k, Authorization: `Bearer ${t}` },
+            body: JSON.stringify({ p_user_id: u, p_role_key: role }),
+          }).then(r => r.ok ? r.json() : false)
+        ));
+        this.permissionGranted = results.some(Boolean);
       } catch { this.permissionGranted = false; }
     },
 
