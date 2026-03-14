@@ -785,5 +785,14 @@ export default {
 @keyframes spread-ad-spin {
   to { transform: rotate(360deg); }
 }
+@media (min-width: 480px) {
+  .spread-ad { padding: 16px 20px; }
+}
+@media (min-width: 1024px) {
+  .spread-ad { padding: 20px 28px; }
+}
+@media (min-width: 1280px) {
+  .spread-ad { padding: 24px 40px; }
+}
 @keyframes spread-perm-spin { to { transform: rotate(360deg); } }
 </style>
