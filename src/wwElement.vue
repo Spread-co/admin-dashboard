@@ -1,5 +1,13 @@
 <template>
   <div v-if="!content.portalTarget || content.portalTarget === 'admin'" class="spread-ad">
+    <div v-if="permissionGranted !== true" class="spread-perm-overlay" style="position:absolute;inset:0;z-index:9999;background:var(--spread-cream,#FBFAF8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:32px;text-align:center;">
+      <div v-if="permissionGranted === null" style="width:24px;height:24px;border:3px solid rgba(0,0,0,0.1);border-top-color:var(--spread-accent,#CE6632);border-radius:50%;animation:spread-perm-spin 0.7s linear infinite;"></div>
+      <template v-else>
+        <span style="font-size:32px;line-height:1;">🔒</span>
+        <strong style="font-size:15px;font-weight:700;color:var(--spread-black,#141414);margin:0;">Access denied</strong>
+        <span style="font-size:13px;color:var(--spread-mid-grey,#6B7280);">You don't have permission to view this area.</span>
+      </template>
+    </div>
     <!-- Header -->
     <div class="spread-ad__header">
       <h2 class="spread-ad__title">Dashboard</h2>
@@ -203,6 +211,7 @@ export default {
 
   data() {
     return {
+      permissionGranted: null,
       loading: false,
       kpis: null,
       funnelRaw: [],
@@ -262,6 +271,7 @@ export default {
     'content.refreshTrigger'() {
       this.loadAll();
     },
+    'content.accessToken': { immediate: true, handler(token) { if (token) this.checkAdminPermission(); else this.permissionGranted = false; } },
   },
 
   mounted() {
@@ -269,6 +279,20 @@ export default {
   },
 
   methods: {
+    async checkAdminPermission() {
+      const t = this.content?.accessToken, u = this.content?.userId,
+            url = this.content?.supabaseUrl, k = this.content?.supabaseAnonKey;
+      if (!t || !u || !url || !k) { this.permissionGranted = false; return; }
+      try {
+        const r = await fetch(`${url}/rest/v1/rpc/has_role`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: k, Authorization: `Bearer ${t}` },
+          body: JSON.stringify({ p_user_id: u, p_role_key: 'admin' }),
+        });
+        this.permissionGranted = r.ok ? !!(await r.json()) : false;
+      } catch { this.permissionGranted = false; }
+    },
+
     client() {
       return createSpreadClient(
         this.content?.supabaseUrl,
@@ -412,6 +436,7 @@ export default {
   max-width: 1440px;
   margin: 0 auto;
   padding: 24px;
+  position: relative;
 }
 
 /* ---- Header ---- */
@@ -760,4 +785,5 @@ export default {
 @keyframes spread-ad-spin {
   to { transform: rotate(360deg); }
 }
+@keyframes spread-perm-spin { to { transform: rotate(360deg); } }
 </style>
