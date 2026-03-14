@@ -409,7 +409,7 @@ export default {
 
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   color: var(--spread-black);
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 24px;
 }
