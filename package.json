@@ -3,7 +3,7 @@
   "version": "0.1.6",
   "description": "Admin dashboard for Spread.co — KPI cards, order funnel, capacity heatmap, product sync status, recent orders",
   "scripts": {
-    "build": "weweb build --name=admin-dashboard --type=element",
+    "build": "weweb build -- name=admin-dashboard type=element",
     "serve": "weweb serve"
   },
   "devDependencies": {
