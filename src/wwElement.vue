@@ -802,21 +802,21 @@ export default {
 /* ── Dark mode ─────────────────────────────────────────────────────── */
 :global(html.dark) .spread-ad {
   background: #000000;
-  color: #f5f0eb;
+  color: #e6d8ca;
   --spread-cream: #18181b;
   --spread-border: rgba(230, 216, 202, 0.12);
   --spread-border-outer: rgba(230, 216, 202, 0.15);
-  --spread-text-primary: #f5f0eb;
+  --spread-text-primary: #e6d8ca;
   --spread-text-secondary: rgba(230, 216, 202, 0.65);
   --spread-text-muted: rgba(230, 216, 202, 0.4);
 }
 :global(html.dark) .spread-ad__kpi-card { background: #18181b; border-color: rgba(230,216,202,0.12); }
 :global(html.dark) .spread-ad__kpi-label { color: rgba(230,216,202,0.5); text-transform: uppercase; }
-:global(html.dark) .spread-ad__kpi-val { color: #f5f0eb; }
+:global(html.dark) .spread-ad__kpi-val { color: #e6d8ca; }
 :global(html.dark) .spread-ad__kpi-sub { color: rgba(230,216,202,0.45); }
 :global(html.dark) .spread-ad__kpi-delta--up { color: #4ade80; }
 :global(html.dark) .spread-ad__kpi-delta--down { color: #f87171; }
-:global(html.dark) .spread-ad__section-title { color: #f5f0eb; }
+:global(html.dark) .spread-ad__section-title { color: #e6d8ca; }
 :global(html.dark) .spread-ad__table { border-color: rgba(230,216,202,0.1); }
 :global(html.dark) .spread-ad__table th { color: rgba(230,216,202,0.45); background: #111014; border-bottom-color: rgba(230,216,202,0.1); }
 :global(html.dark) .spread-ad__table td { color: rgba(230,216,202,0.75); border-bottom-color: rgba(230,216,202,0.06); }
